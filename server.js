@@ -17,3 +17,7 @@ function onConnect(req,res){
 http.createServer(onConnect).listen(8000);
 //Can be used for debugging, equivalent to printf
 console.log("Server is running");
+
+//TEST RESULTS
+//Web Server working on localhost:8000
+//Responds with "Your request was received, and it's cool." when user requests data.
