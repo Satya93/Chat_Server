@@ -13,7 +13,7 @@ function onConnect(req,res){
 	res.end()
 }
 
-//Specify function to run when user connects/requests something to server
+//Specify function to run (OnConnect) when user connects/requests something to server
 http.createServer(onConnect).listen(8000);
 //Can be used for debugging, equivalent to printf
 console.log("Server is running");
