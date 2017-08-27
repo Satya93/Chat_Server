@@ -5,3 +5,4 @@ Current Progress :
 - Node.js server initiated
 - File server initiated to deliver home page
 - Error checking for unavailable resources
+- HTML and CSS templates available for very basic reference.
