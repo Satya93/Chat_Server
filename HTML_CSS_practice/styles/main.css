@@ -1,29 +1,36 @@
 body{
 	background:#555;
 	font-family: verdana;
+	margin:0;
 }
 
-h1,ul{
+ul li{
+	display: inline-block;
+	list-style-type: none;
 	color:white;
-	background-color: black;
+	margin:0;
 }
 
 a{
 	color: green;
+	margin:0;
 }
 
 p{
 	padding: 10px;
+	margin:0;
 }
 
 .sec{
 	padding: 20px;
 	color:red;
 	font-family: arial;
+	margin:0;
 }
 
 #special{
 	padding: 20px;
 	color:green;
 	font-family: cursive;
+	margin:0;
 }
