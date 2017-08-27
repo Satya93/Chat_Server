@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>SatyasTestServer</title>
+</head>
+<body>
+<script type="text/javascript">
+		function sendreq(){
+			var x = document.getElementById("user").value;
+   		 	var text = x;
+    		var req = new XMLHttpRequest();
+    		req.onreadystatechange = function() { 
+        		if (req.readyState == 4 && req.status == 200)
+            		callback(req.responseText);
+    		}
+    		alert(text);
+}
+	</script>
+	<form>
+		Username :
+		<input type="text" name="user" value="Enter Username" id="user">
+  		<br>
+  		Password :
+		<input type="text" name="password" value="Enter Password" id="password">
+  		<br>
+  		<button type="button" value="Login" onclick='sendreq()'> Login </button>
+	</form>
+	<p id="demo"></p>
+</body>
+</html>
