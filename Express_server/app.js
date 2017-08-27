@@ -1,7 +1,10 @@
 var express = require('express');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var engines = require('consolidate');
+
 var app = express();
 var port = 8000;
-var engines = require('consolidate');
 
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
@@ -11,6 +14,9 @@ app.set('view engine', 'html');
 //4. Middleware comes here. It is a layer of functions invoked by express.js before processing the request.
 // Order of middleware matters
 app.use(log);
+app.use(bodyParser.json());// Retrieve data from front end
+app.use(bodyParser.urlencoded({ extended: false }));
+
 function log(req,res,next){
 	console.log(new Date(),req.method,req.url);
 	// Moves to next function
@@ -41,4 +47,9 @@ app.get('/',function(req,res){
 
 app.get('/:id',function(req,res){
 	res.send('The parameter passed was '+req.params.id);
+})
+
+app.post('/login',function(req,res){
+	res.send('Welcome '+req.body.user);
+	res.end();
 })

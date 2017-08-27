@@ -17,14 +17,14 @@
     		alert(text);
 }
 	</script>
-	<form>
+	<form action="/login" method="post">
 		Username :
 		<input type="text" name="user" value="Enter Username" id="user">
   		<br>
   		Password :
 		<input type="text" name="password" value="Enter Password" id="password">
   		<br>
-  		<button type="button" value="Login" onclick='sendreq()'> Login </button>
+  		<input type="submit" value="Login">
 	</form>
 	<p id="demo"></p>
 </body>
