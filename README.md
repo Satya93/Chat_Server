@@ -7,3 +7,4 @@ Current Progress :
 - Error checking for unavailable resources
 - HTML and CSS templates available for very basic reference
 - Added Javascript links within HTML template
+- Passed data to and from Javascript
