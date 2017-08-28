@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Welcome</title>
+</head>
+<body>
+	Welcome {{name}}!<br>
+	{{name}}:{{mesg}}
+	<form action="/newmsg" method="post">
+		Type a message :
+		<input type="text" name="msg" value=" " id="msg">
+		<br>
+  		<input type="submit" value="Submit">
+	</form>
+</body>
+</html>

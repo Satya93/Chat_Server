@@ -2,22 +2,10 @@
 <html>
 <head lang="en">
 	<meta charset="UTF-8">
-	<title>SatyasTestServer</title>
+	<title>Login</title>
 </head>
 <body>
-<script type="text/javascript">
-		function sendreq(){
-			var x = document.getElementById("user").value;
-   		 	var text = x;
-    		var req = new XMLHttpRequest();
-    		req.onreadystatechange = function() { 
-        		if (req.readyState == 4 && req.status == 200)
-            		callback(req.responseText);
-    		}
-    		alert(text);
-}
-	</script>
-	<form action="/login" method="post">
+	<form action="/welcome" method="post">
 		Username :
 		<input type="text" name="user" value="Enter Username" id="user">
   		<br>

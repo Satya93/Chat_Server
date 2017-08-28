@@ -5,6 +5,8 @@ var engines = require('consolidate');
 
 var app = express();
 var port = 8000;
+var message = "No New Messages";
+var user = "Default"
 
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
@@ -49,7 +51,12 @@ app.get('/:id',function(req,res){
 	res.send('The parameter passed was '+req.params.id);
 })
 
-app.post('/login',function(req,res){
-	res.send('Welcome '+req.body.user);
-	res.end();
+app.post('/welcome',function(req,res){
+	user = req.body.user
+	res.render('./welcome.html',{name:user,mesg:message});
+})
+
+app.post('/newmsg',function(req,res){
+	message = req.body.msg;
+	res.render('./welcome.html',{name:user,mesg:message});
 })
