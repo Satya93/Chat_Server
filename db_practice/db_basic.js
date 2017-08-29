@@ -14,8 +14,19 @@ db.connect(function(err) {
 	console.log('Connected!');
   // connected! (unless `err` is set)
 	var query = db.query('SELECT * FROM users', function(err,result,fields) {
-  // Neat!
-  	console.log(result[1]);
+		if(err){
+		console.error("Error! : "+err.stack);
+		return;
+	}
+  		console.log(result[1]);
+  	var query = db.query('INSERT INTO users SET ?',{user_name:'Serhan',user_pass:'fse'}, function(err,result,fields) {
+  		if(err){
+		console.error("Error! : "+err.stack);
+		return;
+	}
+  		console.log(result);
+  		db.destroy();
+  })
 })
 console.log(query.sql);
 })
