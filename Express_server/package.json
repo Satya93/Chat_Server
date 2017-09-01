@@ -10,9 +10,16 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "bower": "^1.8.0",
     "consolidate": "^0.14.5",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.4",
-    "mustache": "^2.3.0"
+    "git": "^0.1.5",
+    "mustache": "^2.3.0",
+    "mysql": "^2.14.1",
+    "mysql-events": "0.0.11",
+    "node-datetime": "^2.0.0",
+    "node-mysql": "^0.4.2",
+    "socket.io": "^2.0.3"
   }
 }

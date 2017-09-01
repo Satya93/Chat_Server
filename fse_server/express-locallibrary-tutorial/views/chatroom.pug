@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    script (type="text/javascript")
+      - var x ={{name}};
+      - document.write(x)
+    .main.container
+      .row
+        .col-md-6.col-md-offset-3
+          h1.display-4.m-b-2 Welcome
+          p=msg
+          form(method='POST' action='/send_msg')
+            div.form-group
+              label(for='name') Message:
+              input#name.form-control(type='text', placeholder=name value=name name='name')
+              input#name.form-control(type='text', placeholder='Enter Message' name='msg')
+              button.btn.btn-primary(type='submit') Send Again
+          

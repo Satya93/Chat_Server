@@ -5,13 +5,37 @@
 	<title>Welcome</title>
 </head>
 <body>
-	Welcome {{name}}!<br>
-	{{name}}:{{mesg}}
 	<form action="/newmsg" method="post">
+		<input name="user" id="user" readonly="readonly" /><br>
 		Type a message :
-		<input type="text" name="msg" value=" " id="msg">
-		<br>
-  		<input type="submit" value="Submit">
+		<input type="text" name="msg" value=" " id="msg" />
+  		<input type="submit" value="Submit" />
+  		<br>
 	</form>
+	<script type="text/javascript">
+			var msg_obj
+			var user_name = "{{name}}"
+			user_obj = 0
+			msg_obj="["+"{{msg_queue_js}}"+"]"
+
+			//msg_obj = JSON.stringify(msg_obj)
+			msg_obj = JSON.parse(msg_obj.replace(/&quot;/g,'"'))
+			msg_obj = JSON.stringify(msg_obj)
+			msg_obj = msg_obj.replace(/{/g,"")
+			msg_obj = msg_obj.replace(/}/g,"")
+			msg_obj = msg_obj.replace(/"/g,"")
+			msg_obj = msg_obj.replace(/]/g,"")
+			msg_obj = msg_obj.replace('[[',"")
+			msg_obj = msg_obj.split(",");
+			qlen = {{qlen}}
+			//document.write(qlen)
+			var i = 0
+			while(i<qlen-2){
+			document.write(msg_obj[i]+"<br>")
+			i++
+			}
+			document.getElementById("user").value= user_name
+		</script>
 </body>
 </html>
+

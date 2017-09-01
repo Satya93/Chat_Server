@@ -8,6 +8,9 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
+var user_plc
+var pw_plc
+
 //_____________________________________________________________________________
 
 var mng = require("mongoose");
@@ -20,7 +23,7 @@ db.once('open', function() {
   console.log("Connected!")
 });
 
-var Schema = mng.Schema;
+var Schema = mng.Schema; 
 
 var user_schema = new Schema({
 	user_id : Number,//Schema.Types.ObjectId,
@@ -39,47 +42,60 @@ var msg_schema = new Schema({
 //_____________________________________________________________________________
 
 var user = mng.model('users',user_schema);
+var msg = mng.model('msgs',msg_schema);
 
 //Create new user
-var new_user = new user({user_name:'Satya',user_password:'9okm8ijn76'});
+//ar new_user = new user({user_name:'Satya',user_password:'9okm8ijn76'});
 //Save new user
-new_user.save(function(err){
-	if(err){
-		console.log("ERROR : Could not save.")
-		return
-	}
-})
+//new_user.save(function(err){
+//	if(err){
+		//console.log("ERROR : Could not save.")
+		//return
+	//}
+//}) 
 
 //Create new user without a dedicated variable
-user.create({user_name:'Mugdha',user_password:'satish'},function(err,new_user){
-	if(err){
-		console.log("ERROR : Something with the DB.")
-		return
-	}
-	console.log("Mugdha done.")
-})
 
-var finduser = mng.model('users',user_schema);
-finduser.find({user_name:'Mugdha'},'user_password',function(err,users){
-	if(err) console.log("Error while searchinng Database");
-	console.log(users)
-})
+//var finduser = mng.model('users',user_schema);
+//finduser.find({user_name:'Satya'},'user_password',function(err,users){
+	//if(err) console.log("Error while searchinng Database");
+	//console.log(users)
+//})
 
 //Controllers and Handlers_____________________________________________________________________________
 
 register = function(req,res){
-	res.send("Register not implemented yet.")
+	user_plc=req.body.name;
+	pw_plc=req.body.password;
+	user.create({user_name:user_plc,user_password:pw_plc},function(err,new_user){
+	if(err){
+		console.log("ERROR : Something with the DB.")
+		return
+	}
+	res.send("User "+user_plc+" has been registered."),
+	console.log("User Registered")
+})
 }
 
 login = function(req,res){
-	res.send("Login not implemented yet.")
+	//res.send("Login not implemented yet.")
+	var un = req.body.name;
+	res.render('chatroom',{name:un})
 }
 
 send_msg = function(req,res){
-	res.send("Send Message not implemented yet.")
-}
+	var un = req.body.name;
+	var mesg = req.body.msg;
+	msg.create({user_name:un,msg_content:mesg},function(err,new_user){
+	if(err){
+		console.log("ERROR : Something with the DB.")
+		return 
+	}
+	//res.send("Send Message not implemented yet.")
+	res.render('chatroom',{name:un,msg:mesg})
+})}
 
-mew_msg = function(req,res){
+new_msg = function(req,res){
 	res.send("New Message not implemented yet.")
 }
 
@@ -135,3 +151,4 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+module.exports = mng;
