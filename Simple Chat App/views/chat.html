@@ -1,19 +1,31 @@
 <!doctype html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
+    <title>FSE Chat</title>
     <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
+      * { margin: 0; padding: 0; box-sizing: border-box; background-color: #999; }
       body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form { background: #999; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; background-color: white; }
       form button { width: 9%; background: rgb(200, 200, 200); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
+      #messages { list-style-type: none; margin-bottom: 5%; padding-bottom: : 0px; }
+      #messages li { padding: 5px 10px; overflow: hidden;}
+      #messages li:nth-child(odd) { background: #ffd180; margin: 5px;}
+      #messages li:nth-child(even) { background: #ffab40; margin: 5px;}
     </style>
   </head>
   <body>
+    <p hidden id="flag">{{flag}}</p>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        var flag = document.querySelector('#flag');//String($('#flag'))
+        $(function(){
+          document.getElementById('flag').value = 1;
+          var socket = io();
+          socket.emit('new login');
+      })
+      </script>
+    <h1>Welcome To FSE Chat App!</h1>
     <h1 id="this">{{username}}</h1>
     <ul id="messages"></ul>
     <form action="/message">
@@ -21,6 +33,7 @@
       <script src="/socket.io/socket.io.js"></script>
       <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
       <script>
+        var flag = $('#flag').text();
         $(function(){
           //4. Add socket functionality to send an event message
           var socket = io();
@@ -32,8 +45,38 @@
             $('#m').val('');
             return false;
           })
-          socket.on('chat message',function(data){
-            $('#messages').append($('<li>').text(data.username+" : "+data.msg));
+
+          socket.on('new login',function(msjson){
+            console.log(document.getElementById('flag').value)
+            document.getElementById('flag').value = 0;
+            console.log(document.getElementById('flag').value)
+            numel = Object.keys(msjson).length;
+            i=0
+            $('#messages').empty();
+            while(i<numel){
+              var un =  msjson[i].user_name
+              var msgcont = msjson[i].msg_content
+              var msgts = new Date(msjson[i].msg_date);
+              $('#messages').append($('<li>').text(un+" says : "+msgcont+"  ( "+msgts.getDate()+"/"+msgts.getMonth()+" at "+msgts.getHours()+":"+msgts.getMinutes()+":"+msgts.getSeconds()+" )"));
+              i++
+            }
+          }
+            )
+
+
+          socket.on('chat message',function(msjson){
+            console.log(document.getElementById('flag').value)
+            document.getElementById('flag').value = 0;
+            console.log(document.getElementById('flag').value)
+            numel = Object.keys(msjson).length;
+            i=0
+            $('#messages').empty();
+            while(i<numel){
+              var un =  msjson[i].user_name
+              var msgcont = msjson[i].msg_content
+              $('#messages').append($('<li>').text(un+" says : "+msgcont+"  ( "+msgts.getDate()+"/"+msgts.getMonth()+" at "+msgts.getHours()+":"+msgts.getMinutes()+":"+msgts.getSeconds()+" 
+              i++
+            }
           })
         })
       </script>
